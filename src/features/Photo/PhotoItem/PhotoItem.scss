@@ -1,0 +1,39 @@
+.PhotoImg{
+    height: 350px;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    
+    &-warp{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top:0;
+        right: 0;
+
+        background-color:rgba(0,0,0,0.7);
+        color: white;
+        opacity: 0;
+
+        border-radius: 8px;
+        margin: 0 !important;
+        
+
+        transition: all 0.5s ease-in-out;
+    }
+    &-img{
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+
+        transform: scale(1) ;
+        transition: all 0.5s ease-in-out;
+    }
+    &:hover &-warp{
+        opacity: 1;
+    }
+    &:hover &-img{
+        transform: scale(1.1);
+    }
+}

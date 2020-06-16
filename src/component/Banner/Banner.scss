@@ -1,0 +1,11 @@
+.banner{
+    background: lightgray;
+    height: 15rem;
+
+    &-title{
+       color: white;
+
+       font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+       font-size: 4rem;
+    }
+}
