@@ -3,7 +3,8 @@ import Select from  'react-select'
 function SelectCustom(props) {
     const {options, label, field, form}=props
     const {name, value}=field;
-
+    const {errors, touched}=form
+    const showError = errors[name]&&touched[name]
     const selectedOption=options.find( option => value===option.value)
 
     const changeSelectedValue=(SelectedValue)=>{
@@ -14,10 +15,11 @@ function SelectCustom(props) {
             //     }
             // }
             // field.onChange(changeEvent)
-            form.setFieldValue(name, SelectedValue)
+            console.log(SelectedValue)
+            form.setFieldValue(name, SelectedValue.value)
     }
     return (
-        <div>
+        <div className="mb-2">
                 {label && <label for={name}>{label}</label>}
                 <Select 
                 options={options}
@@ -26,6 +28,7 @@ function SelectCustom(props) {
                 value={selectedOption}
                 onChange={changeSelectedValue}>
                 </Select>
+    {showError && <p>{errors[name]}</p>}
         </div>
         
     )

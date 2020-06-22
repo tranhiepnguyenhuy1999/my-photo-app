@@ -1,28 +1,46 @@
-import { FastField, Form, Formik } from 'formik'
-import React from 'react'
-import { Col, Container, Row, Button } from 'react-bootstrap'
-import InputCustom from '../../CustomField/InputCustom'
-import SelectCustom from '../../CustomField/SelectCustom'
-import OptionChoices from '../../data/Option'
-import PhotoCustomMid from '../../CustomField/PhotoCustom/PhotoCustomMid'
+import { FastField, Form, Formik } from 'formik';
+import React from 'react';
+import { Col, Container, Row, Button } from 'react-bootstrap';
+import InputCustom from '../../CustomField/InputCustom';
+import SelectCustom from '../../CustomField/SelectCustom';
+import OptionChoices from '../../data/Option';
+import PhotoCustomMid from '../../CustomField/PhotoCustom/PhotoCustomMid';
+import * as Yup from 'yup';
+import {useDispatch, useSelector} from 'react-redux';
+import {addNewPhoto} from './photoSlice'
+
 function AddPhoto() {
     const initialValues={
         name:'',
         type: null,
-        photo:''
+        photo:'https://picsum.photos/200/300'
     }
+    let Schema= Yup.object().shape(
+        {
+            name: Yup.string().required('This field must be a string'),
+            type: Yup.number().required('This field must be a number').nullable(),
+            photo: Yup.string().required('This field is required')
+        }
+    )
+    const dispatch = useDispatch();
+    const photo= useSelector(state => state.photoStore);
     return (
 
         <Formik initialValues={initialValues}
+        validationSchema={Schema}
+        onSubmit={(values)=> {
+            const add=addNewPhoto(values)
+            dispatch(add)}
+    }
         >
             {formikProps => {
-                const {values, errors, touched}= formikProps
+                // const {values, errors, touched}= formikProps
+                // console.log(values, errors, touched)
                 return <Container>
-                            <Row className=''>
-                            <Col sx={12} md={6}>
+                            <Row className='justify-content-center'>
+                            <Col sx={12} md={5}>
                             <h1>Add Your Photo</h1>
-                            <Form onSubmit={(e)=>{console.log(`value`, values)
-                            e.preventDefault()}}>
+                            <Form>
                                 <FastField
                                 //Props formik
                                 name="name"

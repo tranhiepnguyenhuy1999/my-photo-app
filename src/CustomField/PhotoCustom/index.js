@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 import { Button } from 'react-bootstrap';
-import './PhotoCustom.scss'
+import './PhotoCustom.scss';
 
 function PhotoCustom(props) {
-    const {imgUrl, label, changeImgUrl, name, onBlur}= props
+    const {imgUrl, changeImgUrl, name, onBlur}= props
     const randomUrl=()=>{
         let id=Math.trunc(Math.random()*2000);
         return `https://picsum.photos/id/${id}/200/300`
@@ -14,12 +14,13 @@ function PhotoCustom(props) {
 
     }
     return (
-        <div className="">
-            <label>{label}</label>
-            <Button onClick={changePhoto} id ={name} onBlur={onBlur}>Change your photo</Button>
-            <div className="row">
+        <div className="mb-2">
+            <Button onClick={changePhoto} id ={name} onBlur={onBlur} className="mb-2">Change your photo</Button>
+            <div className="row justify-content-center">
                 <div className="PhotoCustom">
-                <img src={imgUrl} className="PhotoCustom-img" alt="Sorry, we can't load"></img>
+                <img src={imgUrl} className="PhotoCustom-img" alt="Sorry, we can't load"
+                    onError={changePhoto}
+                ></img>
                 </div>
             </div>
            

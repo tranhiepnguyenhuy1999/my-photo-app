@@ -1,21 +1,22 @@
 import React from 'react'
-import { Form } from 'react-bootstrap'
+import { Form, } from 'react-bootstrap'
 
 function InputCustom(props) {
-    const {label, placeholder, field}=props
+    const {label, placeholder, field, form}=props
+    const {errors, touched}= form
     const {name} = field
+    const showError= errors[name] && touched[name]
     return (
         <Form.Group controlId="formBasicEmail">
             {label && <Form.Label for={name}>{label}</Form.Label>}
-            <Form.Control type="text"
+            <input type="text"
             placeholder={placeholder}
             id={name}
             name={name}
             {...field}
+            className="form-control"
             />
-            {/* <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-            </Form.Text> */}
+            {showError && <p>{errors[name]}</p>}
         </Form.Group>
     )
 }
