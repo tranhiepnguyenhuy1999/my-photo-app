@@ -15,7 +15,6 @@ function SelectCustom(props) {
             //     }
             // }
             // field.onChange(changeEvent)
-            console.log(SelectedValue)
             form.setFieldValue(name, SelectedValue.value)
     }
     return (

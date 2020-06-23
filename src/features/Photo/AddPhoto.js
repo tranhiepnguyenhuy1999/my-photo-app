@@ -7,14 +7,23 @@ import OptionChoices from '../../data/Option';
 import PhotoCustomMid from '../../CustomField/PhotoCustom/PhotoCustomMid';
 import * as Yup from 'yup';
 import {useDispatch, useSelector} from 'react-redux';
-import {addNewPhoto} from './photoSlice'
-
+import {addNewPhoto} from './photoSlice';
+import {useParams} from 'react-router-dom'
 function AddPhoto() {
-    const initialValues={
-        name:'',
-        type: null,
-        photo:'https://picsum.photos/200/300'
-    }
+        const dispatch = useDispatch();
+        const photo= useSelector(state => state.photoStore);
+        const {idphoto}=useParams();
+        const editPhoto =photo.find(item=>item.id=== +idphoto)
+        const initialValues=idphoto?{
+            name:editPhoto.name,
+            type: editPhoto.type,
+            photo:editPhoto.photo,
+        }:{
+            name:'',
+            type: null,
+            photo:'https://picsum.photos/200/300'
+        }
+   
     let Schema= Yup.object().shape(
         {
             name: Yup.string().required('This field must be a string'),
@@ -22,20 +31,28 @@ function AddPhoto() {
             photo: Yup.string().required('This field is required')
         }
     )
-    const dispatch = useDispatch();
-    const photo= useSelector(state => state.photoStore);
-    return (
+    
 
+    const randomId =()=>{
+        const id= Math.trunc(Math.random()*10000);
+        return id;
+    }
+    
+    return (          
         <Formik initialValues={initialValues}
         validationSchema={Schema}
-        onSubmit={(values)=> {
-            const add=addNewPhoto(values)
-            dispatch(add)}
-    }
-        >
+        onSubmit={(values, idphoto)=> {
+            if(idphoto)
+            {
+                console.log("yeah yeah")
+            } 
+            const idPhoto = randomId();
+            const add=addNewPhoto({...values, id : idPhoto});
+            console.log(add)
+            dispatch(add);
+        }
+    }>
             {formikProps => {
-                // const {values, errors, touched}= formikProps
-                // console.log(values, errors, touched)
                 return <Container>
                             <Row className='justify-content-center'>
                             <Col sx={12} md={5}>
