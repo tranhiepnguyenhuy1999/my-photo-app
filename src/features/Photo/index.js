@@ -1,19 +1,15 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
-import { Link, Route, Switch, useRouteMatch } from "react-router-dom";
-import Banner from '../../component/Banner/Banner';
+import { Route, Switch, useRouteMatch } from "react-router-dom";
 import AddPhoto from './AddPhoto';
-import PhotoList from './PhotoList'
+import MainPage from '../../pages/MainPage';
 function Photo() {
     const match = useRouteMatch();
     return (
-        <div>
-            <Banner title="This is the Banner for Adding Photo"></Banner>
-            <Link to={`${match.url}/add`} ><Button>Add</Button> </Link>
-            <PhotoList></PhotoList>
+        <div>  
             <Switch>
-                <Route  exact path={`${match.url}/add`} component={AddPhoto}/>
-                <Route  path={`${match.url}/:idphoto`} component={AddPhoto}/>
+                <Route exact path='/photo' component={MainPage}></Route>
+                <Route   exact path={`${match.url}/add`} component={AddPhoto}/>
+                <Route  exact path={`${match.url}/:idphoto`} component={AddPhoto}/>
                 <Route/>
             </Switch>
         </div>

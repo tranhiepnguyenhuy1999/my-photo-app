@@ -7,17 +7,18 @@ import OptionChoices from '../../data/Option';
 import PhotoCustomMid from '../../CustomField/PhotoCustom/PhotoCustomMid';
 import * as Yup from 'yup';
 import {useDispatch, useSelector} from 'react-redux';
-import {addNewPhoto} from './photoSlice';
+import {addNewPhoto, editPhoto} from './photoSlice';
 import {useParams} from 'react-router-dom'
+
 function AddPhoto() {
         const dispatch = useDispatch();
         const photo= useSelector(state => state.photoStore);
         const {idphoto}=useParams();
-        const editPhoto =photo.find(item=>item.id=== +idphoto)
+        const editItem =photo.find(item=>item.id === +idphoto)
         const initialValues=idphoto?{
-            name:editPhoto.name,
-            type: editPhoto.type,
-            photo:editPhoto.photo,
+            name:editItem.name,
+            type: editItem.type,
+            photo:editItem.photo,
         }:{
             name:'',
             type: null,
@@ -31,8 +32,8 @@ function AddPhoto() {
             photo: Yup.string().required('This field is required')
         }
     )
-    
 
+// Random ID to create a fake ID for photo
     const randomId =()=>{
         const id= Math.trunc(Math.random()*10000);
         return id;
@@ -41,15 +42,19 @@ function AddPhoto() {
     return (          
         <Formik initialValues={initialValues}
         validationSchema={Schema}
-        onSubmit={(values, idphoto)=> {
+        onSubmit={(values)=> {
             if(idphoto)
             {
-                console.log("yeah yeah")
-            } 
-            const idPhoto = randomId();
-            const add=addNewPhoto({...values, id : idPhoto});
-            console.log(add)
-            dispatch(add);
+                const valueUpdate= {...values, id: +idphoto}
+                const edit= editPhoto(valueUpdate) 
+                dispatch(edit)               
+            }
+            else{
+                const idPhoto = randomId();
+                const add=addNewPhoto({...values, id : idPhoto});
+                dispatch(add);
+            }
+           
         }
     }>
             {formikProps => {

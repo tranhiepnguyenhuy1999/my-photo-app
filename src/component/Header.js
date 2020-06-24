@@ -1,5 +1,6 @@
 import React from 'react'
-import {Navbar, Nav, FormControl, Button, Form } from 'react-bootstrap'
+import { Button, Nav, Navbar } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 function Header() {
     return (
@@ -9,10 +10,9 @@ function Header() {
           <Nav.Link href="#home">Photo</Nav.Link>
           <Nav.Link href="#features">Add Photo</Nav.Link>
         </Nav>
-        <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-light">Search</Button>
-        </Form>
+        <Link to='/photo'>
+        <Button>Home</Button>
+          </Link>
       </Navbar>
     )
 }

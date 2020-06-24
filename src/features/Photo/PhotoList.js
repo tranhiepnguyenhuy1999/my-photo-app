@@ -21,7 +21,6 @@ function PhotoList() {
                 />)}
             </Row>
             }
-            
         </Container>
     )
 }
