@@ -1,0 +1,17 @@
+.footer {
+    background-image: url('./img/background.jpeg');
+    color: honeydew;
+    background-position: center;
+    background-attachment: scroll;
+    padding: 0 !important;
+}
+.p-relative{
+    position: relative;
+}
+.warp{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: gray;
+    opacity: 0.3;
+}

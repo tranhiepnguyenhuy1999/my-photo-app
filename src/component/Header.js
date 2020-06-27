@@ -7,8 +7,8 @@ function Header() {
         <Navbar bg="primary" variant="dark">
         <Navbar.Brand href="#home">Photo App</Navbar.Brand>
         <Nav className="mr-auto">
-          <Nav.Link href="#home">Photo</Nav.Link>
-          <Nav.Link href="#features">Add Photo</Nav.Link>
+          <Link to='/photo'>Photo</Link>
+          <Nav.Link href="/photo/add">Add Photo</Nav.Link>
         </Nav>
         <Link to='/photo'>
         <Button>Home</Button>

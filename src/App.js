@@ -2,8 +2,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
-import Footer from './component/Footer';
-import Header from './component/Header';
+import Footer from './component/Footer/index'
+import Header from './component/Header'; 
 const  Photo = React.lazy(()=> import('./features/Photo/index')) 
 
 function App(){

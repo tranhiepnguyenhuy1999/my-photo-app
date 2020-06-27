@@ -6,7 +6,7 @@ function PhotoCustom(props) {
     const {imgUrl, changeImgUrl, name, onBlur}= props
     const randomUrl=()=>{
         let id=Math.trunc(Math.random()*2000);
-        return `https://picsum.photos/id/${id}/200/300`
+        return `https://picsum.photos/id/${id}/350/350`
     }
     const changePhoto=()=>{
         const url=randomUrl();
