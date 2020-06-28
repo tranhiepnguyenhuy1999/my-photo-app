@@ -20,7 +20,7 @@ function Footer(){
                                 Email
                             </Col>
                             <Col>
-                                <a href="">tranhiepnguyenhuy1999@gmail.com</a>
+                                <a href="tranhiepnguyenhuy1999@gmail.com">tranhiepnguyenhuy1999@gmail.com</a>
                             </Col>
                             </Row>
                         <Row sx={4} className="mb-2">

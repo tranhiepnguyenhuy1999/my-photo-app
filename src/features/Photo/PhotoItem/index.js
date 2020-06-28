@@ -10,12 +10,15 @@ function PhotoItem(props) {
     const removePhoto = props.removePhoto;
     const history = useHistory();
     const typeLabel= OptionChoices.find(opt=>opt.value===type)
-    const remove=(id)=>{ 
+    const remove=()=>{ 
         removePhoto(id)
     }
-    const editPhoto=(id)=>{
+    const editPhoto=()=>{
 
         history.push(`/photo/${id}`)
+    }
+    const detailPhoto=()=>{
+        history.push(`/photo/detail/${id}`)
     }
     return (
                 <Col md={3} className="mb-3 ">
@@ -25,10 +28,12 @@ function PhotoItem(props) {
                         <h3 className="mb-2"> Name :{name}</h3>
                         <div className="mb-2">Type :{typeLabel.label}</div>
                         <div>
-                           <Button className='mr-4 btn-danger' onClick={()=>remove(id)}>Remove</Button>
-                            <Button className="btn-warning" onClick={()=>editPhoto(id)}>Edit</Button> 
-                        </div>                       
+                            <Button className='mr-4 btn-danger' onClick={remove}>Remove</Button>
+                            <Button className="btn-warning" onClick={editPhoto}>Edit</Button> 
+                        </div>
+                                            
                     </Col>
+                    <Col className="bg-light PhotoImg-btnDetail"  onClick={detailPhoto}> Detail</Col>
                 </div>
                 </Col>
     )

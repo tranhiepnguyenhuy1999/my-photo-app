@@ -22,7 +22,7 @@ function AddPhoto() {
         }:{
             name:'',
             type: null,
-            photo:'https://picsum.photos/200/300'
+            photo:'https://picsum.photos/350/350'
         }
    
     let Schema= Yup.object().shape(
