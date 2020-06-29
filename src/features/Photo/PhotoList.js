@@ -11,13 +11,14 @@ function PhotoList() {
     const photoStore = useSelector(state => state.photoStore);
     const dispatch = useDispatch();
     const [onFilter, setOnFilter]=useState(false)
-    const [filterPhotos, setfilterPhotos]=useState([])
     const [pageNum, setPageNum]=useState(1)
     const [pageNumFil, setPageNumFil]=useState(1)
+    const [filter, setfilter] =useState([])
     // Remove photo from Redux
     const onClickRemove=(id)=>{
         const action=removePhoto(id)
         dispatch(action)
+        setfilter(photoStore.filter(photo=>photo.id !== id))
     }
     // Filter photos by type
     const handelFilter=(values)=>{
@@ -27,7 +28,7 @@ function PhotoList() {
             return;
         }
         setOnFilter(true)
-        setfilterPhotos(photoStore.filter(photo=>photo.type===values.value))
+        setfilter(photoStore.filter(photo=>photo.type===values.value))
     }
     // Pagination for All type
     const indexEnd= pageNum*8;
@@ -36,11 +37,11 @@ function PhotoList() {
     // Pagination Number for All type
     const pagesNumber=Math.ceil(photoStore.length/8)
     // Pagination for Filter type
-      const indexEndFilter= pageNum*8;
+      const indexEndFilter= pageNumFil*8;
       const indexStartFilter=indexEndFilter-8;
-      const pageFilterPhoto= filterPhotos.slice(indexStartFilter,indexEndFilter)
+      const pageFilterPhoto= filter.slice(indexStartFilter,indexEndFilter)
     // Pagination Number for Filter type
-      const pagesFilterNumber=Math.ceil(filterPhotos.length/8)
+      const pagesFilterNumber=Math.ceil(filter.length/8)
     // ChangePage for all
     const onClickPaggination=(num)=>{
         setPageNum(num)
@@ -58,14 +59,14 @@ function PhotoList() {
             </Row>
             {onFilter?
             <Col>
-                {(filterPhotos.length===0)?<h1>There is no photo in this type</h1>:<Row>
+                {(filter.length===0)?<h1>There is no photo in this type</h1>:<Row>
                 {pageFilterPhoto.map(photo => <PhotoItem
                 photo={photo}
                 removePhoto={onClickRemove}
                 />)}
                 </Row>
                 }
-            {filterPhotos.length>0 &&<Pagination pages={pagesFilterNumber} changePage={onClickPagginationFilter} pageCur={pageNumFil}></Pagination>}
+            {filter.length>0 &&<Pagination pages={pagesFilterNumber} changePage={onClickPagginationFilter} pageCur={pageNumFil}></Pagination>}
             </Col>
             :
             <Col>
