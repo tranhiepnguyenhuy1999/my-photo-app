@@ -3,6 +3,8 @@ import { Container, Col, Row, Button } from 'react-bootstrap';
 import {useParams, useHistory} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux'
 import {removePhoto} from '../features/Photo/photoSlice'
+import Banner from '../component/Banner/Banner'
+import './Detail.scss'
 function Detail() {
     const photoStore = useSelector(state => state.photoStore);
     const dispatch=useDispatch();
@@ -18,7 +20,9 @@ function Detail() {
         history.push('/photo')
     }
     return (
-        <Container>
+        <Container fluid className='detail'>
+            <Banner title='This is the Banner for Detail'></Banner>
+            <Container className='mt-3'>
             <Row>
                 <Col xs={12} md={5}>
                     <div>
@@ -37,7 +41,11 @@ function Detail() {
                     </div>
                 </Col>
             </Row>
+            </Container>
+     
         </Container>
+        
+     
     )
 }
 

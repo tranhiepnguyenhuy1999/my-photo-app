@@ -1,9 +1,12 @@
 .banner{
-    background: lightgray;
     height: 15rem;
 
     &-title{
        color: white;
+       background: gray;
+
+       border: 5px solid black;
+       padding: 0 1em;
 
        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
        font-size: 4rem;

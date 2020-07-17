@@ -8,36 +8,44 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 function Footer(){
     return(
         <Container className="mt-5 footer p-relative" fluid>
-             <div className="warp"></div>
-            <Container className="mt-3">
-               
+            <div className="warp"></div>
+            <Container className="mt-4">
                 <Row>
-                <Col sx={12} md={6}>
+                <Col xs={12} md={6}>
                     <h3>Thông tin liên lạc</h3>
-                        <Row sx={4} className="mb-2">
-                            <Col sx={6}>
-                                <MailOutlineIcon></MailOutlineIcon>
-                                Email
+                        <Row xs={4} className="mb-2">
+                            <Col xs={3} className='text-center'>
+                                <Row className="justify-content-start">
+                                 <MailOutlineIcon></MailOutlineIcon>
+                                 Email   
+                                </Row>
+                                
                             </Col>
-                            <Col>
+                            <Col className='text-left'>
                                 <a href="tranhiepnguyenhuy1999@gmail.com">tranhiepnguyenhuy1999@gmail.com</a>
                             </Col>
                             </Row>
-                        <Row sx={4} className="mb-2">
-                            <Col sx={6}>
-                            <FacebookIcon></FacebookIcon>
+                        <Row xs={4} className="mb-2">
+                            <Col xs={3}>
+                                <Row className="justify-content-start">
+                                <FacebookIcon></FacebookIcon>
                                 Facebook
+                                </Row>
+                           
                             </Col>
-                            <Col>
+                            <Col className='text-left'>
                                 <a href="https://www.facebook.com/tranhiepnguyenhuy99">Văn Viễn Huy</a>
                             </Col>
-                </Row>
-                        <Row sx={4} className="mb-2">
-                            <Col sx={6}>
-                                <InstagramIcon></InstagramIcon>
+                        </Row>
+                        <Row xs={4} className="mb-2">
+                            <Col xs={3}>
+                                <Row className="justify-content-start">
+                                 <InstagramIcon></InstagramIcon>
                                 Instagram
+                                </Row>
+                             
                             </Col>
-                            <Col>
+                            <Col  className='text-left'>
                                 <a href="https://www.instagram.com/vanvienhuy.1999/">vanvienhuy.1999</a>
                             </Col>
                         </Row>

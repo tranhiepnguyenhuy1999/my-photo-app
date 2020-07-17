@@ -1,9 +1,12 @@
 .footer {
-    background-image: url('./img/background.jpeg');
-    color: honeydew;
+    background-image: url('https://picsum.photos/1850/300');
     background-position: center;
     background-attachment: scroll;
-    padding: 0 !important;
+    height: 200px;
+
+    color: honeydew;
+
+    padding: 0 !important; 
 }
 .p-relative{
     position: relative;

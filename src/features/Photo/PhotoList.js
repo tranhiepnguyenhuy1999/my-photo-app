@@ -51,15 +51,15 @@ function PhotoList() {
         setPageNumFil(num)
     }
     return (
-        <Container className="mt-3 bg-light">
+        <Container className="mt-3 bg-light mt-3">
             <Row className='justify-content-end'>
                     <Col xs={3} className='mb-3 mt-3'>
                 <Select options={OptionChoices} onChange={handelFilter}></Select>
                     </Col>
             </Row>
             {onFilter?
-            <Col>
-                {(filter.length===0)?<h1>There is no photo in this type</h1>:<Row>
+            <Col className='mb-3'>
+                {(filter.length===0)?<h1 >There is no photo in this type</h1>:<Row>
                 {pageFilterPhoto.map(photo => <PhotoItem
                 photo={photo}
                 removePhoto={onClickRemove}
@@ -69,11 +69,11 @@ function PhotoList() {
             {filter.length>0 &&<Pagination pages={pagesFilterNumber} changePage={onClickPagginationFilter} pageCur={pageNumFil}></Pagination>}
             </Col>
             :
-            <Col>
+            <Col className='mb-3'>
                 {(photoStore.length===0)?<h1>There is no photo in this store</h1>:<Row>
                 {pagePhoto.map(photo => <PhotoItem
                 photo={photo}
-                removePhoto={onClickRemove}
+                removePhoto={onClickRemovfoe}
                 />)}
             </Row>
             }

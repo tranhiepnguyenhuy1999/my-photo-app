@@ -1,10 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Suspense } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
-import Footer from './component/Footer/index'
+import Footer from './component/Footer/index';
 import Header from './component/Header';
-import NotFound from './pages/NotFound'
 const  Photo = React.lazy(()=> import('./features/Photo/index')) 
 
 function App(){
@@ -14,9 +13,7 @@ function App(){
       <Router>
         <Header></Header>
         <Switch>
-          <Redirect from='/' to='/photo'></Redirect>
-          <Route exact path='/photo' component={Photo}/>
-          <Route component={NotFound}></Route>
+          <Route path='/photo' component={Photo}/>
         </Switch>
       </Router>
       <Footer></Footer>

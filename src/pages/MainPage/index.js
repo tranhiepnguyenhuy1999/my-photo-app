@@ -11,7 +11,7 @@ function MainPage() {
         <Container fluid className="mainPage">
             <Banner title="This is the Banner for MainPage"></Banner>  
             <Container >
-              <Link to={`${match.url}/add`} ><Button> Add</Button> </Link>
+              <Link to={`${match.url}/add`}><Button> Add</Button> </Link>
              <PhotoList/>
             </Container>
         </Container>
