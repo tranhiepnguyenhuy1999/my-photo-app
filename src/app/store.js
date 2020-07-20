@@ -1,7 +1,9 @@
-import{configureStore} from '@reduxjs/toolkit'
-import photoStore from '../features/Photo/photoSlice'
+import { configureStore } from '@reduxjs/toolkit';
+import category from '../features/Photo/catSlice';
+import photoStore from '../features/Photo/photoSlice';
 const rootReducer={
-    photoStore: photoStore 
+    photoStore: photoStore,
+    category: category, 
 };
 const store= configureStore({
     reducer: rootReducer

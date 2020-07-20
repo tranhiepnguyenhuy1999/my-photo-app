@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import PhotoItem from './PhotoItem';
 import {useSelector, useDispatch} from 'react-redux';
-import {removePhoto} from './photoSlice';
+import {removePhoto, removeAll} from './photoSlice';
 import Select  from 'react-select';
 import OptionChoices from'../../data/OptionFilterPhotos';
 import Pagination from '../../component/PaginationPage'
@@ -14,6 +14,7 @@ function PhotoList() {
     const [pageNum, setPageNum]=useState(1)
     const [pageNumFil, setPageNumFil]=useState(1)
     const [filter, setfilter] =useState([])
+    const [reAll, setreAll]=useState([1])
     // Remove photo from Redux
     const onClickRemove=(id)=>{
         const action=removePhoto(id)
@@ -50,11 +51,16 @@ function PhotoList() {
     const onClickPagginationFilter=(num)=>{
         setPageNumFil(num)
     }
+    const onRemoveAll=()=>{
+        const action= removeAll();
+        dispatch(action)
+    }
     return (
         <Container className="mt-3 bg-light mt-3">
             <Row className='justify-content-end'>
+                    <Col xs={2} className='mb-3 mt-3'><Button className='btn-danger' onClick={onRemoveAll}>Remove All</Button></Col>
                     <Col xs={3} className='mb-3 mt-3'>
-                <Select options={OptionChoices} onChange={handelFilter}></Select>
+                <Select options={OptionChoices} onChange={handelFilter} placeholder='All'></Select>
                     </Col>
             </Row>
             {onFilter?
@@ -73,7 +79,7 @@ function PhotoList() {
                 {(photoStore.length===0)?<h1>There is no photo in this store</h1>:<Row>
                 {pagePhoto.map(photo => <PhotoItem
                 photo={photo}
-                removePhoto={onClickRemovfoe}
+                removePhoto={onClickRemove}
                 />)}
             </Row>
             }

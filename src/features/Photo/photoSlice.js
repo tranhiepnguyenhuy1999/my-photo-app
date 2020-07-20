@@ -16,6 +16,9 @@ const photoStore= createSlice(
                 if(index>-1)
                 state[index]=action.payload
                 },
+            removeAll: (state, action)=>{
+                return state=[]
+            }
         }
     }
 );
@@ -23,5 +26,6 @@ const {actions, reducer}= photoStore;
 export const {
     addNewPhoto,
     removePhoto, 
-    editPhoto,}=actions;
+    editPhoto,
+    removeAll}=actions;
 export default reducer;

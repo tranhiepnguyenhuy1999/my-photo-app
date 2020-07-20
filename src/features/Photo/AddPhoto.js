@@ -3,16 +3,18 @@ import React from 'react';
 import { Col, Container, Row, Button } from 'react-bootstrap';
 import InputCustom from '../../CustomField/InputCustom';
 import SelectCustom from '../../CustomField/SelectCustom';
-import OptionChoices from '../../data/Option';
+import {addCat} from './catSlice'
 import PhotoCustomMid from '../../CustomField/PhotoCustom/PhotoCustomMid';
 import * as Yup from 'yup';
 import {useDispatch, useSelector} from 'react-redux';
 import {addNewPhoto, editPhoto} from './photoSlice';
-import {useParams} from 'react-router-dom'
+import {useParams, useHistory} from 'react-router-dom'
 
 function AddPhoto() {
         const dispatch = useDispatch();
         const photo= useSelector(state => state.photoStore);
+        const category=useSelector(state=>state.category);
+        const history=useHistory();
         const {idphoto}=useParams();
         const editItem =photo.find(item=>item.id === +idphoto)
         const initialValues=idphoto?{
@@ -38,23 +40,30 @@ function AddPhoto() {
         const id= Math.trunc(Math.random()*10000);
         return id;
     }
-    
+    const onAddCat=()=>{
+        const action=addCat({value:4, label:'Travel' }) 
+        dispatch(action)
+       
+        history.push('/photo/add')
+    }
     return (          
         <Formik initialValues={initialValues}
         validationSchema={Schema}
-        onSubmit={(values)=> {
+        onSubmit={(values, {resetForm})=> {
             if(idphoto)
             {
-                const valueUpdate= {...values, id: +idphoto}
-                const edit= editPhoto(valueUpdate) 
-                dispatch(edit)               
+                const valueUpdate= {...values, id: +idphoto};
+                const edit= editPhoto(valueUpdate);
+                dispatch(edit);      
             }
             else{
                 const idPhoto = randomId();
                 const add=addNewPhoto({...values, id : idPhoto});
                 dispatch(add);
+                history.push('/photo/add');
+                
             }
-           
+            resetForm({values:''});
         }
     }>
             {formikProps => {
@@ -63,23 +72,36 @@ function AddPhoto() {
                             <Col sx={12} md={5}>
                             <h1>Add Your Photo</h1>
                             <Form>
+                                <Col>
                                 <FastField
-                                //Props formik
-                                name="name"
-                                component={InputCustom}
-                                //Props into component
-                                placeholder="Please enter your photo title"
-                                label="Title"
-                                >
-                                </FastField>
-                                <FastField
-                                name="type"
-                                component={SelectCustom}
+                                    //Props formik
+                                    name="name"
+                                    component={InputCustom}
+                                    //Props into component
+                                    placeholder="Please enter your photo title"
+                                    label="Title"
+                                    >
+                                    </FastField>
+                                </Col>
+                                <Col>
+                                <Row>
+                                <Col xs={10}>
+                                    <FastField
+                                    name="type"
+                                    component={SelectCustom}
 
-                                label="Type for Photo"
-                                options={OptionChoices}
-                                >
-                                </FastField>
+                                    label="Type for Photo"
+                                    options={category}
+                                    >
+                                    
+                                    </FastField>
+                                </Col>
+                                <Col>
+                                    
+                                    <Button onClick={onAddCat}>+</Button>
+                                </Col>
+                                </Row>
+                                </Col>       
                                 <FastField
                                 name="photo"
                                 component={PhotoCustomMid}
