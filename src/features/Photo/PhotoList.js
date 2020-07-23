@@ -1,19 +1,22 @@
-import React, {useState, useEffect} from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Container, Row } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import CreatableSelect from 'react-select/creatable';
+import Pagination from '../../component/PaginationPage';
 import PhotoItem from './PhotoItem';
-import {useSelector, useDispatch} from 'react-redux';
-import {removePhoto, removeAll} from './photoSlice';
-import Select  from 'react-select';
-import OptionChoices from'../../data/OptionFilterPhotos';
-import Pagination from '../../component/PaginationPage'
+import { removeAll, removePhoto } from './photoSlice';
 
 function PhotoList() {
+    // Redux
     const photoStore = useSelector(state => state.photoStore);
+    const category=useSelector(state=>state.category)
+    const dispatch = useDispatch(); 
+
     const [data, setData]=useState([]);
     useEffect(() => {
         setData(photoStore)
     }, [photoStore]);
-    const dispatch = useDispatch();
+
     const [pageNum, setPageNum]=useState(1);
 
 
@@ -21,15 +24,6 @@ function PhotoList() {
     const onClickRemove=(id)=>{
         const action=removePhoto(id);
         dispatch(action);
-    }
-    // Filter photos by type
-    const handelFilter=(values)=>{
-        if(values.value===4)
-        {
-            setData(photoStore);
-            return;
-        }
-        setData(photoStore.filter(photo=>photo.type===values.value));
     }
     // Pagination 
     const indexEnd= pageNum*8;
@@ -41,16 +35,32 @@ function PhotoList() {
     const onClickPaggination=(num)=>{
         setPageNum(num);
     }
+    // Remove all photo from redux 
     const onRemoveAll=()=>{
         const action= removeAll();
         dispatch(action);
     }
+
+    const handleChange=(values)=>{
+        console.log(values)
+        if(values===null)
+        {
+            setData(photoStore);
+            return;
+        }
+        setData(photoStore.filter(photo=>photo.type===values.value));
+    } 
     return (
         <Container className="mt-3 bg-light mt-3">
             <Row className='justify-content-end'>
                     <Col xs={2} className='mb-3 mt-3'><Button className='btn-danger' onClick={onRemoveAll}>Remove All</Button></Col>
                     <Col xs={3} className='mb-3 mt-3'>
-                <Select options={OptionChoices} onChange={handelFilter} placeholder='All'></Select>
+                    <CreatableSelect
+                        isClearable
+                        onChange={handleChange}
+                        placeholder='Select...'
+                        options={category}
+                    />
                     </Col>
             </Row>
             <Col className='mb-3'>

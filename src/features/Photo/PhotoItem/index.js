@@ -1,15 +1,15 @@
 import React from 'react';
 import { Button, Col } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import './PhotoItem.scss';
-import {useHistory} from 'react-router-dom'
-import OptionChoices from '../../../data/Option'
-
 
 function PhotoItem(props) {
+    const category = useSelector(state => state.category)
     const {type, name, photo, id}= props.photo;
     const removePhoto = props.removePhoto;
     const history = useHistory();
-    const typeLabel= OptionChoices.find(opt=>opt.value===type)
+    const typeLabel= category.find(opt=>opt.value===type)
     const remove=()=>{ 
         removePhoto(id)
     }

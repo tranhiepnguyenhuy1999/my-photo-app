@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Select from  'react-select'
 function SelectCustom(props) {
     const {options, label, field, form}=props
@@ -6,15 +6,8 @@ function SelectCustom(props) {
     const {errors, touched}=form
     const showError = errors[name]&&touched[name]
     const selectedOption=options.find( option => value===option.value)
-
+    useEffect(()=>{}, [options])
     const changeSelectedValue=(SelectedValue)=>{
-            // let changeEvent={
-            //     target:{
-            //         name: name,
-            //         value: SelectedValue.value
-            //     }
-            // }
-            // field.onChange(changeEvent)
             form.setFieldValue(name, SelectedValue.value)
     }
     return (

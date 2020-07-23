@@ -22,7 +22,7 @@ function Footer(){
                                 
                             </Col>
                             <Col className='text-left'>
-                                <a href="tranhiepnguyenhuy1999@gmail.com">tranhiepnguyenhuy1999@gmail.com</a>
+                                <a href="https://www.tranhiepnguyenhuy1999@gmail.com">tranhiepnguyenhuy1999@gmail.com</a>
                             </Col>
                             </Row>
                         <Row xs={4} className="mb-2">
@@ -34,7 +34,7 @@ function Footer(){
                            
                             </Col>
                             <Col className='text-left'>
-                                <a href="https://www.facebook.com/tranhiepnguyenhuy99">Văn Viễn Huy</a>
+                                <a href="https://www.facebook.com/vanvienhuy99">Văn Viễn Huy</a>
                             </Col>
                         </Row>
                         <Row xs={4} className="mb-2">

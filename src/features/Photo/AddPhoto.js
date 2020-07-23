@@ -1,5 +1,5 @@
 import { FastField, Form, Formik } from 'formik';
-import React from 'react';
+import React, {useState} from 'react';
 import { Col, Container, Row, Button } from 'react-bootstrap';
 import InputCustom from '../../CustomField/InputCustom';
 import SelectCustom from '../../CustomField/SelectCustom';
@@ -12,10 +12,16 @@ import {useParams, useHistory} from 'react-router-dom'
 
 function AddPhoto() {
         const dispatch = useDispatch();
+
         const photo= useSelector(state => state.photoStore);
         const category=useSelector(state=>state.category);
+
+        // React router
         const history=useHistory();
         const {idphoto}=useParams();
+
+        //State
+        const [newCat, setNewCat]= useState('')
         const editItem =photo.find(item=>item.id === +idphoto)
         const initialValues=idphoto?{
             name:editItem.name,
@@ -41,10 +47,13 @@ function AddPhoto() {
         return id;
     }
     const onAddCat=()=>{
-        const action=addCat({value:4, label:'Travel' }) 
-        dispatch(action)
-       
-        history.push('/photo/add')
+        if(newCat!=='')
+        {
+        const value=randomId();
+        const action=addCat({label: newCat, value});
+        setNewCat('')
+        dispatch(action);
+        }
     }
     return (          
         <Formik initialValues={initialValues}
@@ -67,6 +76,7 @@ function AddPhoto() {
         }
     }>
             {formikProps => {
+                console.log(newCat)
                 return <Container>
                             <Row className='justify-content-center'>
                             <Col sx={12} md={5}>
@@ -93,12 +103,11 @@ function AddPhoto() {
                                     label="Type for Photo"
                                     options={category}
                                     >
-                                    
                                     </FastField>
                                 </Col>
                                 <Col>
-                                    
-                                    <Button onClick={onAddCat}>+</Button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                Add </button>
                                 </Col>
                                 </Row>
                                 </Col>       
@@ -113,11 +122,37 @@ function AddPhoto() {
                                 <Button type="submit">Submit your Photo</Button>
                             </Form>
                             </Col>
+                           
                             </Row>
+                          
+                       
+
+                {/* Modal for add new category */}
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Add new category</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input type='text' placeholder='Type your new category' className='form-control ' value={newCat}
+                        onChange={(event)=>{setNewCat(event.target.value)}}
+                        />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onClick={onAddCat}>Save changes</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
                         </Container>
             }}
         </Formik>
- 
+    
     )
 }
 
