@@ -13,7 +13,7 @@ function App(){
       <Router>
         <Header></Header>
         <Switch>
-          <Route exact path='/photo' component={Photo}/>
+          <Route path='/photo' component={Photo}/>
         </Switch>
       </Router>
       <Footer></Footer>

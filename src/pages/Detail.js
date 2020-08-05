@@ -7,10 +7,12 @@ import Banner from '../component/Banner/Banner'
 import './Detail.scss'
 function Detail() {
     const photoStore = useSelector(state => state.photoStore);
+    const category = useSelector(state => state.category);
     const dispatch=useDispatch();
     const history=useHistory();
     const {id}=useParams();
     const photo=photoStore.find(photo=> photo.id===+id);
+    const cat= category.find(cat=>cat.value===photo.type)
     const editPhoto=()=>{
         history.push(`/photo/${id}`)
     }
@@ -29,11 +31,13 @@ function Detail() {
                         <img src={photo.photo} alt='cant load'></img>
                     </div>
                 </Col>
-                <Col>
-                    <h2 className="mb-2">Name: {photo.name}</h2>
-                    <h3 className="mb-2"> Type : {photo.type}</h3>
+                
+                <Col className='text-left'> 
+                    <h1>The infomation of the Photo</h1>
+                    <h2 className="mb-4">Name: {photo.name}</h2>
+                    <h3 className="mb-3"> Type : {cat.label}</h3>
                     <div  className="mb-2">
-                        This is the description of this photo
+                        {photo.des }
                     </div>
                     <div>
                         <Button className='mr-3 btn-warning' onClick={editPhoto}>Edit</Button>

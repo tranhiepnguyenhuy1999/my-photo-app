@@ -3,7 +3,13 @@ import {createSlice} from '@reduxjs/toolkit';
 const photoStore= createSlice(
     {
         name: 'photo',
-        initialState: [],
+        initialState: [
+        {name:"Ảnh du lịch",
+        type:3,
+        des:"Đây là lần đầu tiên được đến nơi này",
+        photo:"https://picsum.photos/350/350",
+        id:6422}
+        ],
         reducers:{
             addNewPhoto: (state, action)=>{
                 state.push(action.payload)
