@@ -1,4 +1,4 @@
-import { FastField, Form, Formik } from 'formik';
+    import { FastField, Form, Formik } from 'formik';
 import React from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +9,7 @@ import PhotoCustomMid from '../../CustomField/PhotoCustom/PhotoCustomMid';
 import SelectCustom from '../../CustomField/SelectCustom';
 import CustomerTextArea from '../../CustomField/TextAreaCustom';
 import { addNewPhoto, editPhoto } from './photoSlice';
+import FileUpload from '../../CustomField/fileUpload';
 
 function AddPhoto() {
         const dispatch = useDispatch();
@@ -126,6 +127,7 @@ function AddPhoto() {
                                 label='Chose your photo'
                                 >
                                 </FastField>
+                                <FileUpload/>
                                 <Col className='text-center'>
                                 <Button type="submit">Submit your Photo</Button>
                                 </Col>

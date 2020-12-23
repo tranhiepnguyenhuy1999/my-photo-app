@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Suspense } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import './App.css';
 import Footer from './component/Footer/index';
 import Header from './component/Header';
@@ -13,6 +13,10 @@ function App(){
       <Router>
         <Header></Header>
         <Switch>
+          {/* */}
+          <Route exact path='/'>
+            <Redirect to ='/photo'></Redirect>
+          </Route>
           <Route path='/photo' component={Photo}/>
         </Switch>
       </Router>
